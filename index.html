@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MJ's Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --bg-deep: #020617;
+            --bg-mid: #031036;
+            --neon-cyan: #22d3ee;
+            --neon-blue: #2563eb;
+            --neon-mint: #14b8a6;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background: radial-gradient(circle at 20% 15%, var(--bg-mid), var(--bg-deep) 58%);
+            scroll-behavior: smooth;
+        }
+
+        nav {
+            animation: pageFadeIn 0.7s ease both;
+        }
+
+        .ai-bg {
+                position: fixed;
+                inset: 0;
+                pointer-events: none;
+                z-index: 0;
+                overflow: hidden;
+            }
+
+            .ai-grid {
+                position: absolute;
+                inset: 0;
+                background-image:
+                    linear-gradient(rgba(34, 211, 238, 0.06) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(37, 99, 235, 0.06) 1px, transparent 1px);
+                background-size: 46px 46px;
+                mask-image: radial-gradient(circle at 50% 45%, rgba(0, 0, 0, 0.92), transparent 78%);
+                opacity: 0.55;
+            }
+
+            .ai-orb {
+            position: absolute;
+            border-radius: 9999px;
+            filter: blur(50px);
+            opacity: 0.4;
+            animation: drift 16s ease-in-out infinite alternate;
+        }
+
+        .orb-one {
+            width: 380px;
+            height: 380px;
+            top: 10%;
+            left: 8%;
+            background: radial-gradient(circle, rgba(34, 211, 238, 0.52), transparent 65%);
+        }
+
+        .orb-two {
+            width: 440px;
+            height: 440px;
+            right: 8%;
+            bottom: 4%;
+            background: radial-gradient(circle, rgba(20, 184, 166, 0.45), transparent 68%);
+            animation-duration: 18s;
+        }
+
+        .ai-scan {
+            position: absolute;
+            inset: auto 0 0 0;
+            height: 120px;
+            background: linear-gradient(180deg, transparent, rgba(37, 99, 235, 0.18), transparent);
+            animation: scan 7s linear infinite;
+            opacity: 0.55;
+        }
+
+        .availability-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border: 1px solid rgba(34, 211, 238, 0.18);
+            border-radius: 9999px;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.58), rgba(2, 6, 23, 0.35));
+            color: #e2e8f0;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            font-size: 0.72rem;
+            font-weight: 700;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 28px rgba(34, 211, 238, 0.08), 0 0 0 1px rgba(34, 211, 238, 0.06) inset;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .availability-pill::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent 0%, rgba(103, 232, 249, 0.14) 45%, transparent 75%);
+            transform: translateX(-30%);
+            animation: pillShine 6s ease-in-out infinite;
+        }
+
+        .availability-dot {
+            width: 0.65rem;
+            height: 0.65rem;
+            border-radius: 9999px;
+            background: #22c55e;
+            box-shadow: 0 0 14px rgba(34, 197, 94, 0.95);
+            animation: statusPulse 3s ease-in-out infinite;
+        }
+
+        .hero-name {
+            line-height: 0.9;
+            letter-spacing: -0.05em;
+            text-shadow: 0 0 20px rgba(34, 211, 238, 0.16), 0 0 34px rgba(37, 99, 235, 0.08);
+            -webkit-text-stroke: 1px rgba(34, 211, 238, 0.06);
+        }
+
+        .hero-name-mj {
+            font-size: clamp(4.25rem, 7vw, 6.5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #cbd5e1 0%, #67e8f9 45%, #22d3ee 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-name-last {
+            font-size: clamp(4.5rem, 7.5vw, 7rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, #f8fafc 10%, #e2e8f0 45%, #7dd3fc 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        @keyframes drift {
+            0% {
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+            100% {
+                transform: translate3d(26px, -18px, 0) scale(1.08);
+            }
+        }
+
+        @keyframes scan {
+            0% {
+                transform: translateY(100vh);
+            }
+            100% {
+                transform: translateY(-120vh);
+            }
+        }
+
+        @keyframes statusPulse {
+            0%, 100% {
+                opacity: 0.35;
+                transform: scale(0.88);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.08);
+            }
+        }
+
+        @keyframes pillShine {
+            0%, 100% {
+                opacity: 0.2;
+                transform: translateX(-28%);
+            }
+            50% {
+                opacity: 0.9;
+                transform: translateX(28%);
+            }
+        }
+
+        @keyframes pageFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* section backgrounds and stacking */
+        .section {
+            position: relative;
+            z-index: 5;
+        }
+
+        .home-bg {
+            background: linear-gradient(180deg, rgba(2, 6, 23, 0.18), rgba(2, 6, 23, 0.04));
+            border-top: 1px solid rgba(255,255,255,0.02);
+        }
+
+        .about-bg {
+            background: linear-gradient(135deg, rgba(3,10,27,0.35), rgba(12,74,110,0.10));
+            border-top: 1px solid rgba(255,255,255,0.02);
+        }
+
+        .projects-bg {
+            background: linear-gradient(135deg, rgba(2,6,23,0.40), rgba(34,211,238,0.08));
+        }
+
+        .cert-bg {
+            background: linear-gradient(135deg, rgba(4,12,30,0.36), rgba(59,130,246,0.10));
+        }
+
+        .home-bg::before,
+        .about-bg::before,
+        .projects-bg::before,
+        .cert-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.35;
+        }
+
+        .home-bg::before {
+            background: radial-gradient(circle at 20% 20%, rgba(34, 211, 238, 0.10), transparent 35%);
+        }
+
+        .about-bg::before {
+            background: radial-gradient(circle at 80% 15%, rgba(20, 184, 166, 0.10), transparent 30%);
+        }
+
+        .projects-bg::before {
+            background: radial-gradient(circle at 50% 18%, rgba(59, 130, 246, 0.12), transparent 34%);
+        }
+
+        .cert-bg::before {
+            background: radial-gradient(circle at 25% 70%, rgba(34, 211, 238, 0.08), transparent 32%);
+        }
+
+        .project-shot {
+            min-height: 480px;
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(34, 211, 238, 0.18), transparent 32%),
+                radial-gradient(circle at 80% 80%, rgba(37, 99, 235, 0.18), transparent 30%),
+                linear-gradient(135deg, rgba(15, 23, 42, 0.88), rgba(2, 6, 23, 0.96));
+            box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+        }
+
+        .project-shot::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(2, 6, 23, 0.08), rgba(2, 6, 23, 0.42));
+            pointer-events: none;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+
+        .project-fade {
+            opacity: 0;
+            transform: scale(0.985);
+        }
+
+        .project-nav-btn {
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(255, 255, 255, 0.06);
+            color: #e2e8f0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .project-nav-btn:hover {
+            transform: translateY(-1px);
+            background: rgba(34, 211, 238, 0.12);
+            border-color: rgba(103, 232, 249, 0.35);
+        }
+
+        .project-dot {
+            width: 0.55rem;
+            height: 0.55rem;
+            border-radius: 9999px;
+            background: rgba(148, 163, 184, 0.55);
+            transition: all 0.2s ease;
+        }
+
+        .project-dot.active {
+            width: 1.7rem;
+            background: #67e8f9;
+        }
+
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(26px) scale(0.985);
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transition-delay: var(--reveal-delay, 0ms);
+            will-change: opacity, transform;
+        }
+
+        .reveal-item.reveal-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .cert-gallery-shell {
+            min-height: 88vh;
+            border-radius: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background:
+                linear-gradient(180deg, rgba(15, 23, 42, 0.80), rgba(2, 6, 23, 0.92)),
+                rgba(2, 6, 23, 0.55);
+            box-shadow:
+                0 30px 90px rgba(2, 6, 23, 0.55),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+        }
+
+        .cert-stage {
+            position: relative;
+            min-height: calc(88vh - 7rem);
+            border-radius: 2.25rem;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(34, 211, 238, 0.14), transparent 28%),
+                radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.12), transparent 26%),
+                linear-gradient(180deg, rgba(15, 23, 42, 0.35), rgba(2, 6, 23, 0.96));
+            box-shadow:
+                inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+                inset 0 0 60px rgba(34, 211, 238, 0.08),
+                0 24px 70px rgba(0, 0, 0, 0.36);
+        }
+
+        .cert-stage::before {
+            content: '';
+            position: absolute;
+            inset: 1rem;
+            border-radius: 1.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .cert-stage::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(135deg, rgba(255, 255, 255, 0.10), transparent 25%),
+                linear-gradient(225deg, rgba(34, 211, 238, 0.08), transparent 30%),
+                linear-gradient(180deg, rgba(2, 6, 23, 0.14), transparent 30%, rgba(2, 6, 23, 0.34));
+            mix-blend-mode: screen;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .cert-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            padding: 1.25rem;
+            filter: drop-shadow(0 28px 55px rgba(0, 0, 0, 0.45));
+            transition: opacity 0.35s ease, transform 0.35s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cert-fade {
+            opacity: 0;
+            transform: scale(0.985) translateY(8px);
+        }
+
+        .cert-nav-btn {
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(255, 255, 255, 0.06);
+            color: #e2e8f0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+        }
+
+        .cert-nav-btn:hover {
+            transform: translateY(-1px);
+            background: rgba(34, 211, 238, 0.12);
+            border-color: rgba(103, 232, 249, 0.35);
+        }
+
+        .cert-dot {
+            width: 0.55rem;
+            height: 0.55rem;
+            border-radius: 9999px;
+            background: rgba(148, 163, 184, 0.55);
+            transition: all 0.2s ease;
+        }
+
+        .cert-dot.active {
+            width: 1.7rem;
+            background: #67e8f9;
+        }
+
+        .cert-panel {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.35), rgba(2, 6, 23, 0.12));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        /* active nav underline */
+        nav a.active {
+            text-decoration: underline;
+            text-underline-offset: 8px;
+            text-decoration-thickness: 2px;
+            color: #ffffff;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            nav {
+                animation: none;
+            }
+
+            .reveal-item,
+            .availability-pill::before,
+            .availability-dot,
+            .ai-orb,
+            .ai-scan {
+                transition: none !important;
+                animation: none !important;
+            }
+
+            .reveal-item {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-white relative overflow-x-hidden">
+
+    <div class="ai-bg" aria-hidden="true">
+        <div class="ai-grid"></div>
+        <div class="ai-orb orb-one"></div>
+        <div class="ai-orb orb-two"></div>
+        <div class="ai-scan"></div>
+    </div>
+
+    <nav class="grid grid-cols-3 items-center px-16 py-3 relative z-10 sticky top-0 backdrop-blur-xl bg-slate-950/40 border-b border-white/5">
+        <div>
+            <a href="#home" class="flex items-center">
+                <img src="images/logo.png" alt="MJ logo" class="w-14 h-14 object-contain">
+            </a>
+        </div>
+
+        <ul class="flex justify-center gap-8 uppercase tracking-[0.2em] text-xs font-semibold text-slate-300 justify-self-center">
+            <li><a href="#home" class="px-2 py-1 hover:text-white transition-colors">HOME</a></li>
+            <li><a href="#about" class="px-2 py-1 hover:text-white transition-colors">ABOUT</a></li>
+            <li><a href="#projects" class="px-2 py-1 hover:text-white transition-colors">PROJECTS</a></li>
+            <li><a href="#certification" class="px-2 py-1 hover:text-white transition-colors">CERTIFICATION</a></li>
+        </ul>
+
+        <a href="Coronel_Resume.pdf" target="_blank" rel="noopener noreferrer" class="justify-self-end uppercase tracking-[0.25em] text-xs font-semibold text-slate-200" aria-label="Open resume in new tab">
+            <span class="inline-block border border-slate-300 px-4 py-2 rounded-md hover:bg-white hover:text-black transition-colors">
+                RESUME
+            </span>
+        </a>
+    </nav>
+
+<section id="home" class="min-h-screen flex items-center justify-between px-20 relative z-0 scroll-mt-28 section home-bg">
+
+    <div class="max-w-xl transform -translate-y-10">
+        <div class="availability-pill">
+            <span class="availability-dot" aria-hidden="true"></span>
+            <span>AVAILABLE FOR NEW PROJECT</span>
+        </div>
+
+        <p class="mt-6 text-gray-400">
+            Hi there, I'm
+        </p>
+
+        <h1 class="hero-name hero-name-mj">
+            MJ 
+        </h1>
+
+        <h1 class="hero-name hero-name-last">
+             CORONEL
+        </h1>
+
+        <p class="mt-6 text-gray-300">
+            Graduating Computer Engineering student with hands-on experience in software 
+            development, embedded systems, robotics, networking, and technical support.
+        </p>
+
+        <div class="mt-8 flex flex-wrap items-center gap-4">
+            <a href="#" class="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-lg font-semibold hover:bg-slate-200 transition-colors">
+                View My Work <span aria-hidden="true">&rarr;</span>
+            </a>
+
+            <a href="#" class="inline-flex items-center bg-black text-white border border-white/40 px-6 py-3 rounded-lg font-semibold hover:bg-slate-900 transition-colors">
+                Get In Touch
+            </a>
+        </div>
+
+        <div class="mt-8 flex items-center gap-4">
+            <a href="https://www.facebook.com/michael.james.coronel" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-cyan-300/40 text-cyan-200 hover:bg-cyan-300/15 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
+                    <path d="M13 9h3V6h-3c-2.2 0-4 1.8-4 4v2H6v3h3v6h3v-6h3l1-3h-4v-2c0-.6.4-1 1-1z" />
+                </svg>
+            </a>
+
+            <a href="https://www.instagram.com/mjcrnel" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-cyan-300/40 text-cyan-200 hover:bg-cyan-300/15 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
+                    <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm10.5 1.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z" />
+                </svg>
+            </a>
+
+            <a href="https://www.linkedin.com/in/michael-james-coronel-8244852b0/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-cyan-300/40 text-cyan-200 hover:bg-cyan-300/15 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
+                    <path d="M6.5 8a1.75 1.75 0 1 1 0-3.5A1.75 1.75 0 0 1 6.5 8zM5 9h3v10H5V9zm5 0h2.9v1.4h.1c.4-.8 1.4-1.7 3-1.7 3.2 0 3.8 2.1 3.8 4.8V19h-3v-4.8c0-1.1 0-2.6-1.6-2.6s-1.8 1.2-1.8 2.5V19h-3V9z" />
+                </svg>
+            </a>
+
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mjc514617@gmail.com&su=Hello%20Michael&body=Hi%20Michael%2C%0A%0AI%20visited%20your%20portfolio%20and%20wanted%20to%20reach%20out." target="_blank" rel="noopener noreferrer" aria-label="Gmail" class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-cyan-300/40 text-cyan-200 hover:bg-cyan-300/15 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
+                    <path d="M3 6.8 12 13l9-6.2V18a2 2 0 0 1-2 2h-3v-7l-4 2.8L8 13v7H5a2 2 0 0 1-2-2V6.8zm18-.6a2 2 0 0 0-2.2-.2L12 10.6 5.2 6A2 2 0 0 0 3 6.2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v1.2z" />
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <div>
+        <img
+            src="images/profile.png"
+            alt="Profile"
+            class="w-[620px] -translate-x-20"
+        >
+    </div>
+
+</section>
+
+<section id="about" class="min-h-screen flex items-start px-20 py-12 relative z-0 scroll-mt-28 section about-bg">
+    <div class="w-full">
+        <div class="text-center">
+            <p class="text-cyan-300 uppercase tracking-[0.35em] text-xs font-semibold">ABOUT ME</p>
+            <h2 class="mt-4 mx-auto max-w-3xl text-4xl md:text-5xl font-extrabold text-white leading-tight">Who I Am</h2>
+            <p class="mt-4 mx-auto text-slate-300 leading-7 max-w-3xl text-base md:text-lg">A software developer who turns ideas into polished digital experiences.</p>
+        </div>
+
+        <div class="mt-12 flex flex-col lg:flex-row items-start justify-center gap-12">
+            <div class="w-full lg:w-2/3 max-w-3xl">
+                <p class="text-justify text-slate-300 leading-7 text-base md:text-lg">
+                    Graduating Computer Engineering student with hands-on experience in software development, embedded systems, robotics,
+                    networking, and technical support. Passionate about leveraging technology to solve real-world problems through innovative and
+                    efficient solutions. Recognized for strong analytical thinking, adaptability, and collaborative teamwork, with a commitment to
+                    continuous learning and professional growth. Eager to contribute technical expertise and a results-driven mindset to a dynamic
+                    organization.
+                </p>
+
+                <div class="mt-8 grid grid-cols-3 gap-4 max-w-2xl">
+                    <div class="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-md">
+                        <p class="text-2xl font-bold text-white">5+</p>
+                        <p class="mt-1 text-sm text-slate-300">Areas of interest</p>
+                    </div>
+                    <div class="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-md">
+                        <p class="text-2xl font-bold text-white">A+</p>
+                        <p class="mt-1 text-sm text-slate-300">Learning mindset</p>
+                    </div>
+                    <div class="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-md">
+                        <p class="text-2xl font-bold text-white">24/7</p>
+                        <p class="mt-1 text-sm text-slate-300">Ready to build</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full lg:w-1/3 max-w-lg">
+                <div class="rounded-[2rem] border border-white/10 bg-slate-950/70 p-7 shadow-2xl shadow-cyan-500/10 backdrop-blur-xl">
+                    <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                        <span class="text-sm uppercase tracking-[0.3em] text-slate-400">Profile Card</span>
+                        <span class="h-3 w-3 rounded-full bg-green-400 shadow-[0_0_18px_rgba(34,197,94,0.9)]"></span>
+                    </div>
+
+                    <div class="mt-6 grid gap-4">
+                        <div class="flex items-center justify-between gap-6 rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
+                            <p class="italic text-xs uppercase tracking-[0.25em] text-cyan-300">Current Focus</p>
+                            <p class="text-right text-base md:text-lg font-semibold text-white">Software Developer</p>
+                        </div>
+                        <div class="flex items-center justify-between gap-6 rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
+                            <p class="italic text-xs uppercase tracking-[0.25em] text-cyan-300">Course</p>
+                            <p class="text-right text-base md:text-lg font-semibold text-white">BS in Computer Engineering</p>
+                        </div>
+                        <div class="flex items-center justify-between gap-6 rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
+                            <p class="italic text-xs uppercase tracking-[0.25em] text-cyan-300">University</p>
+                            <p class="text-right text-base md:text-lg font-semibold text-white">USTP</p>
+                        </div>
+                        <div class="flex items-center justify-between gap-6 rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
+                            <p class="italic text-xs uppercase tracking-[0.25em] text-cyan-300">Location</p>
+                            <p class="text-right text-base md:text-lg font-semibold text-white">CDO, Philippines</p>
+                        </div>
+                        <div class="flex items-center justify-between gap-6 rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
+                            <p class="italic text-xs uppercase tracking-[0.25em] text-cyan-300">Status</p>
+                            <p class="text-right text-base md:text-lg font-semibold text-white">Open for opportunities</p>
+                        </div>
+                    </div>
+
+                    <a href="Coronel_Resume.pdf" target="_blank" rel="noopener noreferrer" class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-cyan-300/30 bg-cyan-300/10 px-5 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-cyan-100 hover:bg-cyan-300/20 transition-colors" aria-label="Download CV">
+                        <span>Download CV</span>
+                        <span aria-hidden="true">&darr;</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="projects" class="min-h-screen flex items-center px-20 py-20 relative z-0 scroll-mt-28 section projects-bg">
+    <div class="w-full">
+        <div class="max-w-6xl mx-auto text-center">
+            <p class="text-cyan-300 uppercase tracking-[0.35em] text-xs font-semibold">Projects</p>
+            <h2 class="mt-4 text-4xl md:text-6xl font-extrabold text-white">Below are three completed projects that showcase my expertise.</h2>
+            <p class="mt-4 max-w-4xl mx-auto text-slate-300 leading-8 text-base md:text-lg">Use the arrows to move through each project. The layout alternates so the first and third put the image on the left, while the second puts the text on the left.</p>
+        </div>
+
+        <div class="mt-14 max-w-7xl mx-auto rounded-[2.5rem] border border-white/10 bg-white/5 p-6 md:p-10 backdrop-blur-xl shadow-2xl shadow-cyan-500/10">
+            <div id="projectCarousel" class="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-8 items-center transition-all duration-300">
+                <div id="projectVisual" class="project-shot relative order-1 lg:order-1">
+                    <img id="projectImage" class="project-image" src="images/project1.png" alt="Milksha project screenshot">
+                    <div class="absolute inset-0 z-10 flex items-end p-8 md:p-10 pointer-events-none">
+                        <div class="max-w-md rounded-2xl border border-white/10 bg-slate-950/65 px-5 py-4 backdrop-blur-md">
+                            <p id="projectBadge" class="text-cyan-300 uppercase tracking-[0.35em] text-xs font-semibold">Project 1</p>
+                            <h3 id="projectVisualTitle" class="mt-3 text-3xl md:text-4xl font-extrabold text-white">Qtrackr</h3>
+                            <p id="projectVisualText" class="mt-3 text-slate-300 leading-7 text-sm md:text-base">An IoT-enabled ticketing and web-based queue monitoring system for the Outpatient Department of Public Health Services.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="projectDetails" class="order-2 lg:order-2 rounded-[2rem] border border-white/10 bg-slate-950/65 p-8 md:p-10 min-h-[480px] flex flex-col justify-between">
+                    <div class="flex items-center justify-between gap-4">
+                        <div>
+                            <p id="projectNumber" class="text-cyan-300 uppercase tracking-[0.35em] text-xs font-semibold">01 / 03</p>
+                            <h3 id="projectTitle" class="mt-4 text-4xl md:text-5xl font-extrabold text-white">Qtrackr</h3>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <button id="projectPrev" class="project-nav-btn" type="button" aria-label="Previous project">&larr;</button>
+                            <button id="projectNext" class="project-nav-btn" type="button" aria-label="Next project">&rarr;</button>
+                        </div>
+                    </div>
+
+                    <p id="projectSummary" class="mt-8 text-slate-300 leading-8 text-lg md:text-xl">An IoT-enabled ticketing and web-based queue monitoring system for the Outpatient Department of Public Health Services.</p>
+
+                    <p id="projectCategory" class="mt-8 text-cyan-200 uppercase tracking-[0.28em] text-sm font-semibold">UI/UX Design, Website Development</p>
+                    <p id="projectType" class="mt-2 text-slate-400 text-lg md:text-xl">Healthcare Technology</p>
+
+                    <div class="mt-10 flex items-center gap-3">
+                        <span class="project-dot active" data-dot="0"></span>
+                        <span class="project-dot" data-dot="1"></span>
+                        <span class="project-dot" data-dot="2"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="certification" class="min-h-screen flex items-center px-20 py-20 relative z-0 scroll-mt-28 section cert-bg">
+    <div class="w-full">
+        <div class="max-w-6xl mx-auto text-center">
+            <p class="text-cyan-300 uppercase tracking-[0.35em] text-xs font-semibold">Certification</p>
+            <h2 class="mt-4 text-4xl md:text-6xl font-extrabold text-white">The following credentials reflect my ongoing pursuit of knowledge and professional growth.</h2>
+            <p class="mt-4 max-w-4xl mx-auto text-slate-300 leading-8 text-base md:text-lg">A fullscreen-style showcase for each credential, with soft motion and premium framing.</p>
+        </div>
+
+        <div class="mt-14 max-w-7xl mx-auto cert-gallery-shell p-5 md:p-8 backdrop-blur-xl">
+            <div class="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-5 items-center">
+                <div id="certStage" class="cert-stage relative cert-panel">
+                    <img id="certImage" class="cert-image" src="images/certification1.png" alt="Certification 1">
+                    <div class="absolute top-5 left-5 z-10 rounded-full border border-white/15 bg-slate-950/65 px-4 py-2 text-xs uppercase tracking-[0.35em] text-cyan-200 backdrop-blur-md">Cinematic Gallery</div>
+                    <div id="certCounter" class="absolute bottom-5 left-5 z-10 rounded-2xl border border-white/10 bg-slate-950/65 px-4 py-3 text-sm text-slate-200 backdrop-blur-md">01 / 05</div>
+                </div>
+
+                <div class="flex lg:flex-col items-center justify-center gap-3 lg:gap-4 lg:pr-2">
+                    <button id="certPrev" class="cert-nav-btn" type="button" aria-label="Previous certification">&larr;</button>
+                    <button id="certNext" class="cert-nav-btn" type="button" aria-label="Next certification">&rarr;</button>
+                </div>
+            </div>
+
+            <div class="mt-5 flex items-center justify-center gap-3">
+                <span class="cert-dot active" data-cert-dot="0"></span>
+                <span class="cert-dot" data-cert-dot="1"></span>
+                <span class="cert-dot" data-cert-dot="2"></span>
+                <span class="cert-dot" data-cert-dot="3"></span>
+                <span class="cert-dot" data-cert-dot="4"></span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const projectSlides = [
+        {
+            number: '01 / 03',
+            title: 'Qtrackr',
+            badge: 'Project 1',
+            summary: 'Designed and developed an IoT-enabled ticketing and queue management system that streamlines patient flow through, automated ticket generation, QR code integration, and real-time queue monitoring. Built a web-based dashboard for staff and healthcare providers to manage queues, track patient status, and improve operational efficiency. Reduced congestion and enhanced patient experience through centralized data management and remote queue access.',
+            category: 'Full Stack Development, Iot Integration',
+            type: 'Healthcare Technology',
+            visualTitle: 'Qtrackr',
+            visualText: 'An IoT-enabled ticketing and web-based queue monitoring system for the Outpatient Department of Public Health Services',
+            image: 'images/project1.png',
+            imageAlt: 'Qtrackr project screenshot',
+            leftVisual: true
+        },
+        {
+            number: '02 / 03',
+            title: 'Arduino-Based Robotics Projects',
+            badge: 'Project 2',
+            summary: 'Developed Arduino-based robots capable of autonomous navigation, obstacle detection, and competitive sumo operations using sensors, motor control, and embedded programming',
+            category: 'Robotics and Automation',
+            type: 'Educational and Competitive Robotics',
+            visualTitle: 'Arduino-Based Robotics Projects',
+            visualText: 'Obstacle Avoidance Robot & SumoBot',
+            image: 'images/project2.png',
+            imageAlt: 'Arduino-Based Robotics Projects',
+            leftVisual: false
+        },
+        {
+            number: '03 / 03',
+            title: 'Real-Time Accident Detection System using ESP32',
+            badge: 'Project 3',
+            summary: 'Developed an ESP32-based accident detection system that uses sensor data and threshold-based logic to automatically detect impact events and enable real-time monitoring.',
+            category: 'IoT Development, Embedded Systems',
+            type: 'Healthcare Technology',
+            visualTitle: 'Real-Time Accident Detection System using ESP32',
+            image: 'images/project3.png',
+            imageAlt: 'Project three screenshot',
+            leftVisual: true
+        }
+    ];
+
+    let currentProject = 0;
+
+    const projectNumber = document.getElementById('projectNumber');
+    const projectTitle = document.getElementById('projectTitle');
+    const projectSummary = document.getElementById('projectSummary');
+    const projectCategory = document.getElementById('projectCategory');
+    const projectType = document.getElementById('projectType');
+    const projectBadge = document.getElementById('projectBadge');
+    const projectVisualTitle = document.getElementById('projectVisualTitle');
+    const projectVisualText = document.getElementById('projectVisualText');
+    const projectImage = document.getElementById('projectImage');
+    const projectVisual = document.getElementById('projectVisual');
+    const projectDetails = document.getElementById('projectDetails');
+    const projectCarousel = document.getElementById('projectCarousel');
+    const projectPrev = document.getElementById('projectPrev');
+    const projectNext = document.getElementById('projectNext');
+    const projectDots = document.querySelectorAll('.project-dot');
+
+    function renderProject(index) {
+        const slide = projectSlides[index];
+
+        projectNumber.textContent = slide.number;
+        projectTitle.textContent = slide.title;
+        projectSummary.textContent = slide.summary;
+        projectCategory.textContent = slide.category;
+        projectType.textContent = slide.type;
+        projectBadge.textContent = slide.badge;
+        projectVisualTitle.textContent = slide.visualTitle;
+        projectVisualText.textContent = slide.visualText;
+        projectImage.src = slide.image;
+        projectImage.alt = slide.imageAlt;
+
+        projectVisual.classList.add('project-fade');
+        projectDetails.classList.add('project-fade');
+
+        requestAnimationFrame(() => {
+            projectVisual.classList.remove('project-fade');
+            projectDetails.classList.remove('project-fade');
+        });
+
+        projectCarousel.classList.toggle('lg:grid-cols-[1.05fr_0.95fr]', slide.leftVisual);
+        projectCarousel.classList.toggle('lg:grid-cols-[0.95fr_1.05fr]', !slide.leftVisual);
+
+        projectVisual.classList.toggle('lg:order-1', slide.leftVisual);
+        projectVisual.classList.toggle('lg:order-2', !slide.leftVisual);
+        projectDetails.classList.toggle('lg:order-2', slide.leftVisual);
+        projectDetails.classList.toggle('lg:order-1', !slide.leftVisual);
+
+        projectDots.forEach((dot, dotIndex) => {
+            dot.classList.toggle('active', dotIndex === index);
+        });
+    }
+
+    projectPrev.addEventListener('click', () => {
+        currentProject = (currentProject - 1 + projectSlides.length) % projectSlides.length;
+        renderProject(currentProject);
+    });
+
+    projectNext.addEventListener('click', () => {
+        currentProject = (currentProject + 1) % projectSlides.length;
+        renderProject(currentProject);
+    });
+
+    projectDots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            currentProject = Number(dot.getAttribute('data-dot'));
+            renderProject(currentProject);
+        });
+    });
+
+    renderProject(currentProject);
+
+    const certSlides = [
+        { src: 'images/certification1.png', alt: 'Certification 1' },
+        { src: 'images/certification2.png', alt: 'Certification 2' },
+        { src: 'images/certification3.png', alt: 'Certification 3' },
+        { src: 'images/certification4.png', alt: 'Certification 4' },
+        { src: 'images/certification5.png', alt: 'Certification 5' }
+    ];
+
+    let currentCert = 0;
+    const certImage = document.getElementById('certImage');
+    const certStage = document.getElementById('certStage');
+    const certCounter = document.getElementById('certCounter');
+    const certPrev = document.getElementById('certPrev');
+    const certNext = document.getElementById('certNext');
+    const certDots = document.querySelectorAll('.cert-dot');
+
+    function renderCert(index) {
+        const slide = certSlides[index];
+
+        certStage.classList.add('cert-fade');
+        requestAnimationFrame(() => {
+            certImage.src = slide.src;
+            certImage.alt = slide.alt;
+            certStage.classList.remove('cert-fade');
+        });
+
+        certDots.forEach((dot, dotIndex) => {
+            dot.classList.toggle('active', dotIndex === index);
+        });
+        certPrev.setAttribute('aria-label', `Previous certification ${index + 1}`);
+        certNext.setAttribute('aria-label', `Next certification ${index + 1}`);
+        certCounter.textContent = `${String(index + 1).padStart(2, '0')} / 05`;
+    }
+
+    certPrev.addEventListener('click', () => {
+        currentCert = (currentCert - 1 + certSlides.length) % certSlides.length;
+        renderCert(currentCert);
+    });
+
+    certNext.addEventListener('click', () => {
+        currentCert = (currentCert + 1) % certSlides.length;
+        renderCert(currentCert);
+    });
+
+    certDots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            currentCert = Number(dot.getAttribute('data-cert-dot'));
+            renderCert(currentCert);
+        });
+    });
+
+    document.addEventListener('keydown', event => {
+        if (event.key === 'ArrowLeft') {
+            currentCert = (currentCert - 1 + certSlides.length) % certSlides.length;
+            renderCert(currentCert);
+        }
+
+        if (event.key === 'ArrowRight') {
+            currentCert = (currentCert + 1) % certSlides.length;
+            renderCert(currentCert);
+        }
+    });
+
+    renderCert(currentCert);
+
+    // underline active nav link on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav ul li a');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const id = entry.target.getAttribute('id');
+            const link = document.querySelector(`nav ul li a[href="#${id}"]`);
+            if (entry.isIntersecting) {
+                navLinks.forEach(a => a.classList.remove('active'));
+                if (link) link.classList.add('active');
+            }
+        });
+    }, { root: null, rootMargin: '-30% 0px -50% 0px', threshold: 0 });
+
+    sections.forEach(s => observer.observe(s));
+
+    // update active on click (for immediate feedback)
+    navLinks.forEach(a => a.addEventListener('click', () => {
+        navLinks.forEach(x => x.classList.remove('active'));
+        a.classList.add('active');
+    }));
+</script>
+
+<!-- Contact / Hire Section -->
+<section id="contact" class="min-h-screen flex items-center px-8 md:px-20 py-20 relative z-0 scroll-mt-28 section cert-bg">
+    <div class="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div class="text-left pt-6">
+            <h2 class="text-[4.5rem] md:text-[6.5rem] leading-tight font-extrabold tracking-tight text-white">LET'S SHIP.</h2>
+            <p class="mt-6 text-slate-300 max-w-lg">Tell us what you need. Response within 24 hours.</p>
+        </div>
+
+        <div>
+            <form id="contactForm" class="rounded-2xl border border-white/10 bg-slate-950/70 p-6 md:p-8 shadow-2xl backdrop-blur-md" autocomplete="off">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-xs uppercase tracking-[0.25em] text-slate-400">Name</label>
+                        <input name="name" required class="mt-2 w-full rounded-lg bg-transparent border border-white/8 px-4 py-3 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400" placeholder="What is your name?">
+                    </div>
+
+                    <div>
+                        <label class="text-xs uppercase tracking-[0.25em] text-slate-400">Email Address</label>
+                        <input name="email" type="email" required class="mt-2 w-full rounded-lg bg-transparent border border-white/8 px-4 py-3 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400" placeholder="What is your email address?">
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <label class="text-xs uppercase tracking-[0.25em] text-slate-400">Company (optional)</label>
+                    <input name="company" class="mt-2 w-full rounded-lg bg-transparent border border-white/8 px-4 py-3 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400" placeholder="What is your company's name? (Optional)">
+                </div>
+
+                <div class="mt-4">
+                    <label class="text-xs uppercase tracking-[0.25em] text-slate-400">What are you looking for?</label>
+                    <input name="subject" class="mt-2 w-full rounded-lg bg-transparent border border-white/8 px-4 py-3 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400" placeholder="What are you looking for?">
+                </div>
+
+                <div class="mt-4">
+                    <label class="text-xs uppercase tracking-[0.25em] text-slate-400">How did you hear about us?</label>
+                    <select name="source" class="mt-2 w-full rounded-lg bg-transparent border border-white/8 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400">
+                        <option value="">Select...</option>
+                        <option>LinkedIn</option>
+                        <option>Instagram</option>
+                        <option>Referral</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <div class="mt-4">
+                    <label class="text-xs uppercase tracking-[0.25em] text-slate-400">Any additional info (optional)</label>
+                    <textarea name="message" rows="5" class="mt-2 w-full rounded-lg bg-transparent border border-white/8 px-4 py-3 text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400" placeholder="Feel free to share any additional details. (Optional)"></textarea>
+                </div>
+
+                <div class="mt-6 flex items-center justify-between gap-4">
+                    <div class="text-sm text-slate-400">Response within 24 hours.</div>
+                    <button type="submit" class="inline-flex items-center gap-3 bg-cyan-500 hover:bg-cyan-400 text-white font-semibold px-6 py-3 rounded-full shadow-lg">SEND MESSAGE</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Contact form - open mail client with filled content
+    (function(){
+        const form = document.getElementById('contactForm');
+        if (!form) return;
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const data = new FormData(form);
+            const name = data.get('name') || '';
+            const email = data.get('email') || '';
+            const company = data.get('company') || '';
+            const subject = data.get('subject') || 'Portfolio inquiry';
+            const source = data.get('source') || '';
+            const message = data.get('message') || '';
+
+            const body = `Name: ${name}\nEmail: ${email}\nCompany: ${company}\nHeard about us: ${source}\n\n${message}`;
+            const to = 'mjc514617@gmail.com';
+            const mailto = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailto;
+        });
+    })();
+
+    (function() {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const revealObserver = prefersReducedMotion
+            ? null
+            : new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('reveal-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.18,
+                rootMargin: '0px 0px -8% 0px'
+            });
+
+        const reveal = (elements, startDelay = 0, step = 120) => {
+            elements.filter(Boolean).forEach((element, index) => {
+                element.classList.add('reveal-item');
+                element.style.setProperty('--reveal-delay', `${startDelay + (index * step)}ms`);
+
+                if (prefersReducedMotion) {
+                    element.classList.add('reveal-visible');
+                    return;
+                }
+
+                revealObserver.observe(element);
+            });
+        };
+
+        const introSequence = (elements, startDelay = 0, step = 140) => {
+            elements.filter(Boolean).forEach((element, index) => {
+                element.classList.add('reveal-item');
+                element.style.setProperty('--reveal-delay', `${startDelay + (index * step)}ms`);
+                window.setTimeout(() => {
+                    element.classList.add('reveal-visible');
+                }, startDelay + (index * step));
+            });
+        };
+
+        introSequence([
+            document.querySelector('nav')
+        ], 0, 0);
+
+        introSequence([
+            document.querySelector('#home .availability-pill'),
+            document.querySelector('#home .max-w-xl > p:nth-of-type(1)'),
+            document.querySelector('#home .hero-name-mj'),
+            document.querySelector('#home .hero-name-last'),
+            document.querySelector('#home .max-w-xl > p:nth-of-type(2)'),
+            document.querySelector('#home .mt-8.flex.flex-wrap.items-center.gap-4'),
+            document.querySelector('#home .mt-8.flex.items-center.gap-4'),
+            document.querySelector('#home > div:last-child img')
+        ], 120, 170);
+
+        reveal([
+            document.querySelector('#about .text-center > p:first-child'),
+            document.querySelector('#about .text-center h2'),
+            document.querySelector('#about .text-center > p:last-child'),
+            document.querySelector('#about .mt-12 > div:first-child > p'),
+            ...document.querySelectorAll('#about .mt-12 > div:first-child .grid > div'),
+            document.querySelector('#about .mt-12 > div:last-child')
+        ], 100, 120);
+
+        reveal([
+            document.querySelector('#projects .text-center > p:first-child'),
+            document.querySelector('#projects .text-center h2'),
+            document.querySelector('#projects .text-center > p:last-child'),
+            document.querySelector('#projects #projectCarousel')
+        ], 100, 120);
+
+        reveal([
+            document.querySelector('#certification .text-center > p:first-child'),
+            document.querySelector('#certification .text-center h2'),
+            document.querySelector('#certification .text-center > p:last-child'),
+            document.querySelector('#certification .cert-gallery-shell')
+        ], 100, 120);
+
+        reveal([
+            document.querySelector('#contact .text-left h2'),
+            document.querySelector('#contact .text-left p'),
+            document.querySelector('#contact form')
+        ], 100, 120);
+
+        // Ensure footer reveal-items are observed
+        // Footer is visible by default (no scroll reveal)
+
+        document.querySelectorAll('section[id]').forEach(section => {
+            section.addEventListener('animationend', () => {
+                const items = section.querySelectorAll('.reveal-item');
+                items.forEach(item => item.classList.add('reveal-visible'));
+            }, { once: true });
+        });
+    })();
+</script>
+
+    <!-- Footer: inspired by user's image -->
+    <footer id="site-footer" class="bg-slate-900/70 border-t border-white/6 py-16 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="md:col-span-2">
+                <h3 class="text-2xl md:text-3xl font-extrabold text-white">Build with Purpose. Innovate with Passion.</h3>
+                <p class="mt-4 text-slate-300 max-w-xl">Harness technology to create efficient, scalable, and meaningful solutions for today's challenges and tomorrow's opportunities.</p>
+                <hr class="my-6 border-white/6" />
+                <div class="text-sm text-slate-400">© 2026 MJ Coronel. All rights reserved.</div>
+            </div>
+
+            <div>
+                <h4 class="text-sm uppercase text-slate-300 font-semibold mb-3">Navigation</h4>
+                <ul class="space-y-2 text-slate-300">
+                    <li><a href="#hero" class="hover:text-white">Home</a></li>
+                    <li><a href="#works" class="hover:text-white">Works</a></li>
+                    <li><a href="#services" class="hover:text-white">Services</a></li>
+                    <li><a href="#about" class="hover:text-white">About me</a></li>
+                    <li><a href="#blog" class="hover:text-white">Blog</a></li>
+                    <li><a href="#contact" class="hover:text-white">Contact</a></li>
+                    <li><a href="#culture" class="hover:text-white">Culture</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-sm uppercase text-slate-300 font-semibold mb-3">Services</h4>
+                <ul class="space-y-2 text-slate-300">
+                    <li>Productivity &amp; Collaboration</li>
+                    <li>AI Applications</li>
+                    <li>Web Applications</li>
+                    <li>Mobile Applications</li>
+                    <li>Websites</li>
+                    <li>Business Process Systems</li>
+                    <li>UI/UX Design</li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-sm uppercase text-slate-300 font-semibold mb-3">Social</h4>
+                <ul class="space-y-2 text-slate-300">
+                    <li><a href="#" class="hover:text-white">LinkedIn</a></li>
+                    <li><a href="#" class="hover:text-white">Instagram</a></li>
+                    <li><a href="#" class="hover:text-white">Facebook</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
