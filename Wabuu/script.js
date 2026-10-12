@@ -24,10 +24,22 @@ letterButton.addEventListener("click", () => {
 });
 
 maybeButton.addEventListener("click", () => {
-  maybeResponse.textContent = "Haha, okay — I’ll respect that. I’ll be right here when you’re ready ♡";
+  const moves = [
+    { x: -75, y: 72 },
+    { x: 82, y: 92 },
+    { x: -45, y: 140 },
+    { x: 62, y: 155 },
+    { x: 0, y: 190 }
+  ];
+  const moveIndex = Number(maybeButton.dataset.moves || 0);
+  const move = moves[moveIndex % moves.length];
+  maybeButton.dataset.moves = String(moveIndex + 1);
   maybeButton.classList.remove("playful");
-  window.requestAnimationFrame(() => maybeButton.classList.add("playful"));
-  maybeButton.textContent = "Still your choice 🙈";
+  maybeButton.style.setProperty("--dodge-x", `${move.x}px`);
+  maybeButton.style.setProperty("--dodge-y", `${move.y}px`);
+  maybeButton.classList.add("dodging");
+  maybeResponse.textContent = "Hehe, that button is feeling shy 🙈";
+  maybeButton.textContent = "Nope, try again 🙈";
 });
 
 yesButton.addEventListener("click", () => {

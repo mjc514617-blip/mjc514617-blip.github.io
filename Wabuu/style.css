@@ -95,7 +95,8 @@ em { color: var(--rose); font-style: italic; }
 .tiny-heart, .celebration-mark { width: 42px; height: 42px; margin: 0 auto 24px; border-radius: 50%; display: grid; place-items: center; color: white; background: var(--rose); font-size: 17px; }
 .invitation-card h2, .celebration-card h2 { font-size: clamp(2.8rem, 6vw, 5rem); }
 .invitation-note, .celebration-copy { max-width: 390px; margin: 25px auto 35px; color: var(--muted); font-size: 14px; line-height: 1.8; }
-.choice-buttons { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.choice-buttons { position: relative; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; min-height: 52px; }
+.button-quiet.dodging { position: relative; z-index: 2; transition: transform .35s cubic-bezier(.2,.8,.2,1); transform: translate(var(--dodge-x, 0), var(--dodge-y, 0)); }
 .choice-response { min-height: 20px; margin: 18px 0 0; color: var(--rose-deep); font: italic 15px "Playfair Display", Georgia, serif; }
 .celebration-section { padding: 10px 0 125px; }
 .celebration-card { background: #fff; }
