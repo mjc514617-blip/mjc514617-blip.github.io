@@ -24,8 +24,10 @@ letterButton.addEventListener("click", () => {
 });
 
 maybeButton.addEventListener("click", () => {
-  maybeResponse.textContent = "Of course. I’ll be right here when you’re ready ♡";
-  maybeButton.textContent = "Take your time 🙈";
+  maybeResponse.textContent = "Haha, okay — I’ll respect that. I’ll be right here when you’re ready ♡";
+  maybeButton.classList.remove("playful");
+  window.requestAnimationFrame(() => maybeButton.classList.add("playful"));
+  maybeButton.textContent = "Still your choice 🙈";
 });
 
 yesButton.addEventListener("click", () => {
