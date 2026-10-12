@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff8f6">
+  <title>A Little Surprise, Just for You</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="ambient-hearts" id="hearts" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#welcome" aria-label="Back to the beginning">for my favorite person <span>♡</span></a>
+    <button class="music-toggle" id="musicToggle" type="button" aria-pressed="false" aria-label="Play optional background music">
+      <span aria-hidden="true">♫</span> <span id="musicLabel">play our song</span>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero section-shell" id="welcome">
+      <div class="hero-copy reveal">
+        <p class="kicker">A LITTLE SOMETHING FOR YOU</p>
+        <h1>Hey, my<br><em>favorite person...</em></h1>
+        <p class="intro">I made you a tiny corner of the internet, filled with a few of my favorite things: you, us, and the memories still waiting to happen.</p>
+        <a class="button button-primary" href="#memories">Open your little surprise <span aria-hidden="true">↘</span></a>
+      </div>
+      <div class="hero-photo photo-placeholder reveal" data-label="Add your favorite photo here">
+        <!-- Replace the src below with a local image such as images/hero.jpg. -->
+        <img src="images/hero.jpg" alt="A favorite memory of us" data-fallback="hero">
+        <div class="photo-note"><span>♡</span><br>your favorite<br>photo goes here</div>
+        <span class="photo-stamp">made with love</span>
+      </div>
+      <div class="scroll-cue" aria-hidden="true"><span></span> scroll slowly</div>
+    </section>
+
+    <section class="section-shell memories-section" id="memories">
+      <div class="section-heading reveal">
+        <p class="kicker">CHAPTER ONE</p>
+        <h2>Little moments,<br><em>big feelings.</em></h2>
+        <p>Some of my favorite memories have one very important thing in common.</p>
+      </div>
+      <div class="memory-grid">
+        <figure class="memory-card memory-card-tall reveal">
+          <div class="memory-photo photo-placeholder"><img src="images/memory-01.jpg" alt="Replace with a favorite memory" data-fallback="memory"></div>
+          <figcaption><span>01</span><strong>The kind of happy that lingers.</strong><small>Add a caption about this memory</small></figcaption>
+        </figure>
+        <figure class="memory-card memory-card-offset reveal">
+          <div class="memory-photo photo-placeholder"><img src="images/memory-02.jpg" alt="Replace with a favorite memory" data-fallback="memory"></div>
+          <figcaption><span>02</span><strong>Our little world, our own pace.</strong><small>Add a caption about this memory</small></figcaption>
+        </figure>
+        <figure class="memory-card memory-card-wide reveal">
+          <div class="memory-photo photo-placeholder"><img src="images/memory-03.jpg" alt="Replace with a favorite memory" data-fallback="memory"></div>
+          <figcaption><span>03</span><strong>Here is to all the ones still to come.</strong><small>Add a caption about this memory</small></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="letter-section" id="letter">
+      <div class="letter-layout section-shell">
+        <div class="section-heading reveal">
+          <p class="kicker">CHAPTER TWO</p>
+          <h2>A few words<br><em>from my heart.</em></h2>
+          <p>No grand speech. Just something honest I wanted you to have.</p>
+        </div>
+        <div class="letter-wrap reveal">
+          <div class="envelope" id="envelope">
+            <div class="envelope-flap"></div>
+            <div class="envelope-front"><span>to my favorite human</span><b>♡</b></div>
+            <article class="letter-paper" id="letterPaper" aria-hidden="true">
+              <p class="letter-date">a note for you</p>
+              <p>Hey love,</p>
+              <!-- Personalize this letter in this section of index.html. -->
+              <p>I hope you know how special you are to me. Being around you makes ordinary days feel softer, funnier, and a whole lot more worth remembering.</p>
+              <p>I would really like to make another little memory with you — just us, somewhere we can talk, laugh, and enjoy the moment.</p>
+              <p>With all my heart,<br><em>me ♡</em></p>
+            </article>
+          </div>
+          <button class="text-button" id="letterButton" type="button" aria-expanded="false">Open the letter <span aria-hidden="true">→</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="invitation-section section-shell" id="invitation">
+      <div class="invitation-card reveal">
+        <p class="kicker">THE IMPORTANT PART</p>
+        <div class="tiny-heart" aria-hidden="true">♥</div>
+        <h2>Will you go on<br><em>a date with me?</em></h2>
+        <p class="invitation-note">No pressure, no perfect answer needed — I just wanted to ask you properly.</p>
+        <div class="choice-buttons">
+          <button class="button button-primary" id="yesBtn" type="button">Yes, I'd love to! <span aria-hidden="true">♥</span></button>
+          <button class="button button-quiet" id="maybeBtn" type="button">Maybe later <span aria-hidden="true">🙈</span></button>
+        </div>
+        <p class="choice-response" id="maybeResponse" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="celebration-section section-shell hidden" id="celebration" aria-live="polite">
+      <div class="celebration-card reveal">
+        <div class="celebration-mark" aria-hidden="true">♥</div>
+        <p class="kicker">BEST ANSWER EVER</p>
+        <h2>It's a <em>date!</em></h2>
+        <p class="celebration-copy">You just made me very, very happy. Now let’s turn this little yes into a memory we can keep.</p>
+        <div class="date-plan">
+          <p class="kicker">OUR LITTLE PLAN</p>
+          <!-- Edit the four details below to personalize the proposed date. -->
+          <div class="plan-row"><span>✦</span><div><small>activity</small><strong>Good food & a slow walk</strong></div></div>
+          <div class="plan-row"><span>✦</span><div><small>date</small><strong>Pick a day that feels like us</strong></div></div>
+          <div class="plan-row"><span>✦</span><div><small>time & place</small><strong>To be decided together</strong></div></div>
+        </div>
+        <p class="closing-note">I can’t wait to see you smile. ♡</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">made especially for you <span>♡</span></footer>
+  <audio id="backgroundMusic" loop preload="none">
+    <!-- Optional: add a local file at audio/our-song.mp3, or change this source. -->
+    <source src="audio/our-song.mp3" type="audio/mpeg">
+  </audio>
+  <script src="script.js"></script>
+</body>
+</html>
