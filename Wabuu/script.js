@@ -42,7 +42,17 @@ maybeButton.addEventListener("click", () => {
   maybeButton.textContent = "Nope, try again 🙈";
 });
 
+function resetMaybeButton() {
+  maybeButton.classList.remove("dodging", "playful");
+  maybeButton.style.removeProperty("--dodge-x");
+  maybeButton.style.removeProperty("--dodge-y");
+  maybeButton.dataset.moves = "0";
+  maybeButton.textContent = "No, I wouldn't";
+  maybeResponse.textContent = "";
+}
+
 yesButton.addEventListener("click", () => {
+  resetMaybeButton();
   celebration.classList.remove("hidden");
   celebration.querySelector(".reveal").classList.add("visible");
   celebration.scrollIntoView({ behavior: "smooth", block: "center" });
