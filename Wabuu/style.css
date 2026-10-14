@@ -98,8 +98,16 @@ em { color: var(--rose); font-style: italic; }
 .choice-buttons { position: relative; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; min-height: 52px; }
 .button-quiet.dodging { position: relative; z-index: 2; transition: transform .35s cubic-bezier(.2,.8,.2,1); transform: translate(var(--dodge-x, 0), var(--dodge-y, 0)); }
 .choice-response { min-height: 20px; margin: 18px 0 0; color: var(--rose-deep); font: italic 15px "Playfair Display", Georgia, serif; }
-.celebration-section { padding: 10px 0 125px; }
-.celebration-card { background: #fff; }
+.celebration-section { min-height: 78vh; display: grid; align-items: center; padding: 45px 0 125px; }
+.celebration-card { display: grid; grid-template-columns: 1.1fr .9fr; align-items: stretch; gap: 38px; padding: 55px; background: #fff; overflow: hidden; }
+.celebration-copy { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; text-align: left; }
+.celebration-copy .celebration-mark { margin: 0 0 22px; }
+.celebration-intro { max-width: 410px; margin: 25px 0 8px; color: var(--muted); font-size: 14px; line-height: 1.8; }
+.celebration-copy .date-plan { width: 100%; margin: 28px 0 22px; }
+.celebration-copy .text-button { margin-top: 30px; }
+.date-photo { min-height: 510px; transform: rotate(2deg); }
+.date-photo .photo-note { font-size: 20px; }
+.date-photo .photo-stamp { bottom: 30px; }
 .date-plan { max-width: 420px; margin: 35px auto; padding: 25px; background: #fff4f0; text-align: left; }
 .date-plan .kicker { margin-bottom: 17px; }
 .plan-row { display: flex; gap: 13px; padding: 12px 0; border-top: 1px solid var(--line); }
@@ -134,6 +142,12 @@ em { color: var(--rose); font-style: italic; }
   .envelope { height: 260px; }
   .envelope.open .letter-paper { transform: translateY(-112px); }
   .invitation-card, .celebration-card { padding: 55px 20px; }
+  .celebration-section { padding-top: 20px; }
+  .celebration-card { display: flex; flex-direction: column-reverse; gap: 35px; }
+  .celebration-copy { align-items: center; text-align: center; }
+  .celebration-copy .celebration-mark { margin: 0 auto 22px; }
+  .celebration-intro { margin: 25px auto 8px; }
+  .date-photo { width: 82%; min-height: 330px; align-self: flex-end; }
 }
 @media (max-width: 440px) {
   .brand { font-size: 10px; }

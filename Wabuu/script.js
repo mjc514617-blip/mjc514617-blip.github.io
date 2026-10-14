@@ -5,6 +5,8 @@ const yesButton = document.getElementById("yesBtn");
 const maybeButton = document.getElementById("maybeBtn");
 const maybeResponse = document.getElementById("maybeResponse");
 const celebration = document.getElementById("celebration");
+const invitation = document.getElementById("invitation");
+const backToQuestion = document.getElementById("backToQuestion");
 const music = document.getElementById("backgroundMusic");
 const musicToggle = document.getElementById("musicToggle");
 const musicLabel = document.getElementById("musicLabel");
@@ -25,11 +27,11 @@ letterButton.addEventListener("click", () => {
 
 maybeButton.addEventListener("click", () => {
   const moves = [
-    { x: -75, y: 72 },
-    { x: 82, y: 92 },
-    { x: -45, y: 140 },
-    { x: 62, y: 155 },
-    { x: 0, y: 190 }
+    { x: 0, y: -58 },
+    { x: 88, y: -24 },
+    { x: 78, y: 72 },
+    { x: -35, y: 108 },
+    { x: -85, y: 24 }
   ];
   const moveIndex = Number(maybeButton.dataset.moves || 0);
   const move = moves[moveIndex % moves.length];
@@ -38,7 +40,7 @@ maybeButton.addEventListener("click", () => {
   maybeButton.style.setProperty("--dodge-x", `${move.x}px`);
   maybeButton.style.setProperty("--dodge-y", `${move.y}px`);
   maybeButton.classList.add("dodging");
-  maybeResponse.textContent = "Hehe, that button is feeling shy 🙈";
+  maybeResponse.textContent = "Hehe, that button is walking away in style 🙈";
   maybeButton.textContent = "Nope, try again 🙈";
 });
 
@@ -53,12 +55,19 @@ function resetMaybeButton() {
 
 yesButton.addEventListener("click", () => {
   resetMaybeButton();
+  invitation.classList.add("hidden");
   celebration.classList.remove("hidden");
   celebration.querySelector(".reveal").classList.add("visible");
-  celebration.scrollIntoView({ behavior: "smooth", block: "center" });
+  celebration.scrollIntoView({ behavior: "smooth", block: "start" });
   for (let index = 0; index < 28; index += 1) {
     window.setTimeout(createHeart, index * 90);
   }
+});
+
+backToQuestion.addEventListener("click", () => {
+  celebration.classList.add("hidden");
+  invitation.classList.remove("hidden");
+  invitation.scrollIntoView({ behavior: "smooth", block: "center" });
 });
 
 musicToggle.addEventListener("click", async () => {
