@@ -7,9 +7,18 @@ const maybeResponse = document.getElementById("maybeResponse");
 const celebration = document.getElementById("celebration");
 const invitation = document.getElementById("invitation");
 const backToQuestion = document.getElementById("backToQuestion");
+const dateForm = document.getElementById("dateForm");
+const dateChoice = document.getElementById("dateChoice");
+const timeChoice = document.getElementById("timeChoice");
+const chosenDate = document.getElementById("chosenDate");
+const chosenDateText = document.getElementById("chosenDateText");
+const chosenTimeText = document.getElementById("chosenTimeText");
 const music = document.getElementById("backgroundMusic");
 const musicToggle = document.getElementById("musicToggle");
 const musicLabel = document.getElementById("musicLabel");
+
+const today = new Date();
+dateChoice.min = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
 
 document.querySelectorAll("img[data-fallback]").forEach((image) => {
   image.addEventListener("error", () => {
@@ -68,6 +77,26 @@ backToQuestion.addEventListener("click", () => {
   celebration.classList.add("hidden");
   invitation.classList.remove("hidden");
   invitation.scrollIntoView({ behavior: "smooth", block: "center" });
+});
+
+dateForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const selectedDate = new Date(`${dateChoice.value}T00:00:00`);
+  const formattedDate = new Intl.DateTimeFormat("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric"
+  }).format(selectedDate);
+  const formattedTime = new Intl.DateTimeFormat("en-US", {
+    hour: "numeric",
+    minute: "2-digit"
+  }).format(new Date(`2000-01-01T${timeChoice.value}`));
+
+  chosenDateText.textContent = formattedDate;
+  chosenTimeText.textContent = formattedTime;
+  dateForm.classList.add("hidden");
+  chosenDate.classList.remove("hidden");
 });
 
 musicToggle.addEventListener("click", async () => {

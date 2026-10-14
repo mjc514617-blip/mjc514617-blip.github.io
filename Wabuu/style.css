@@ -110,6 +110,13 @@ em { color: var(--rose); font-style: italic; }
 .date-photo .photo-stamp { bottom: 30px; }
 .date-plan { max-width: 420px; margin: 35px auto; padding: 25px; background: #fff4f0; text-align: left; }
 .date-plan .kicker { margin-bottom: 17px; }
+.date-question { margin: -4px 0 18px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.date-form { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 12px; }
+.date-form label { color: var(--rose-deep); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.date-form input { width: 100%; min-height: 42px; border: 1px solid var(--line); border-radius: 7px; padding: 9px 10px; color: var(--ink); background: #fff; font: 13px "DM Sans", sans-serif; }
+.date-form input:focus { border-color: var(--rose); outline: 2px solid rgba(185,77,108,.16); }
+.date-form .button { grid-column: 1 / -1; width: 100%; margin-top: 8px; }
+.chosen-date .plan-row:first-child { border-top: 0; }
 .plan-row { display: flex; gap: 13px; padding: 12px 0; border-top: 1px solid var(--line); }
 .plan-row > span { color: var(--rose); }
 .plan-row small { display: block; margin-bottom: 3px; color: var(--rose); font-size: 9px; letter-spacing: .15em; text-transform: uppercase; }
