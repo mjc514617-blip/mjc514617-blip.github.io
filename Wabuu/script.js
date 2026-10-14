@@ -13,6 +13,9 @@ const timeChoice = document.getElementById("timeChoice");
 const chosenDate = document.getElementById("chosenDate");
 const chosenDateText = document.getElementById("chosenDateText");
 const chosenTimeText = document.getElementById("chosenTimeText");
+const activityForm = document.getElementById("activityForm");
+const chosenActivity = document.getElementById("chosenActivity");
+const chosenActivityText = document.getElementById("chosenActivityText");
 const music = document.getElementById("backgroundMusic");
 const musicToggle = document.getElementById("musicToggle");
 const musicLabel = document.getElementById("musicLabel");
@@ -97,6 +100,15 @@ dateForm.addEventListener("submit", (event) => {
   chosenTimeText.textContent = formattedTime;
   dateForm.classList.add("hidden");
   chosenDate.classList.remove("hidden");
+  activityForm.classList.remove("hidden");
+});
+
+activityForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const selectedActivity = activityForm.elements.activity.value;
+  chosenActivityText.textContent = selectedActivity;
+  activityForm.classList.add("hidden");
+  chosenActivity.classList.remove("hidden");
 });
 
 musicToggle.addEventListener("click", async () => {

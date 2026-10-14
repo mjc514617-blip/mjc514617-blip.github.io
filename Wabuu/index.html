@@ -119,6 +119,22 @@
               <div class="plan-row"><span>✦</span><div><small>our date</small><strong id="chosenDateText"></strong></div></div>
               <div class="plan-row"><span>✦</span><div><small>our time</small><strong id="chosenTimeText"></strong></div></div>
             </div>
+            <form class="activity-picker hidden" id="activityForm">
+              <p class="activity-title">What are we feeling?</p>
+              <p class="activity-subtitle">Choose the little adventure you’d like for our date.</p>
+              <div class="activity-grid">
+                <label class="activity-option"><input type="radio" name="activity" value="Movie date" required><span>🎬</span><strong>Movie date</strong></label>
+                <label class="activity-option"><input type="radio" name="activity" value="Coffee date"><span>☕</span><strong>Coffee</strong></label>
+                <label class="activity-option"><input type="radio" name="activity" value="Jollibee"><span>🍔</span><strong>Jollibee</strong></label>
+                <label class="activity-option"><input type="radio" name="activity" value="Mang Inasal"><span>🍗</span><strong>Mang Inasal</strong></label>
+                <label class="activity-option"><input type="radio" name="activity" value="Samgyup"><span>🥓</span><strong>Samgyup</strong></label>
+                <label class="activity-option"><input type="radio" name="activity" value="Eat all you can"><span>🍽️</span><strong>Eat all you can</strong></label>
+              </div>
+              <button class="button button-primary activity-next" type="submit">Next <span aria-hidden="true">→</span></button>
+            </form>
+            <div class="chosen-activity hidden" id="chosenActivity" aria-live="polite">
+              <div class="plan-row"><span>✦</span><div><small>our date activity</small><strong id="chosenActivityText"></strong></div></div>
+            </div>
           </div>
           <p class="closing-note">I can’t wait to see you smile. ♡</p>
           <button class="text-button" id="backToQuestion" type="button">Read my question again <span aria-hidden="true">↩</span></button>
