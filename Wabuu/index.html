@@ -112,7 +112,26 @@
               <label for="dateChoice">Date</label>
               <input id="dateChoice" name="date" type="date" required>
               <label for="timeChoice">Time</label>
-              <input id="timeChoice" name="time" type="time" required>
+              <button class="time-trigger" id="timeTrigger" type="button" aria-expanded="false">Choose a time <span aria-hidden="true">⌄</span></button>
+              <input id="timeChoice" name="time" type="hidden">
+              <div class="time-picker hidden" id="timePicker">
+                <div class="time-fields">
+                  <label>Hour
+                    <select id="hourChoice" aria-label="Hour"></select>
+                  </label>
+                  <span class="time-colon" aria-hidden="true">:</span>
+                  <label>Minute
+                    <select id="minuteChoice" aria-label="Minute"></select>
+                  </label>
+                  <label>Period
+                    <select id="periodChoice" aria-label="AM or PM">
+                      <option value="AM">AM</option>
+                      <option value="PM">PM</option>
+                    </select>
+                  </label>
+                </div>
+                <button class="button button-primary time-ok" id="timeOk" type="button">OK</button>
+              </div>
               <button class="button button-primary" type="submit">Save our date <span aria-hidden="true">♡</span></button>
             </form>
             <div class="chosen-date hidden" id="chosenDate" aria-live="polite">
@@ -135,6 +154,7 @@
             <div class="chosen-activity hidden" id="chosenActivity" aria-live="polite">
               <div class="plan-row"><span>✦</span><div><small>our date activity</small><strong id="chosenActivityText"></strong></div></div>
             </div>
+            <button class="text-button edit-choices hidden" id="editChoices" type="button">Edit my choices <span aria-hidden="true">↺</span></button>
           </div>
           <p class="closing-note">I can’t wait to see you smile. ♡</p>
           <button class="text-button" id="backToQuestion" type="button">Read my question again <span aria-hidden="true">↩</span></button>

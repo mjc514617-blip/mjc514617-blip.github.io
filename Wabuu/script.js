@@ -10,18 +10,32 @@ const backToQuestion = document.getElementById("backToQuestion");
 const dateForm = document.getElementById("dateForm");
 const dateChoice = document.getElementById("dateChoice");
 const timeChoice = document.getElementById("timeChoice");
+const timeTrigger = document.getElementById("timeTrigger");
+const timePicker = document.getElementById("timePicker");
+const timeOk = document.getElementById("timeOk");
+const hourChoice = document.getElementById("hourChoice");
+const minuteChoice = document.getElementById("minuteChoice");
+const periodChoice = document.getElementById("periodChoice");
 const chosenDate = document.getElementById("chosenDate");
 const chosenDateText = document.getElementById("chosenDateText");
 const chosenTimeText = document.getElementById("chosenTimeText");
 const activityForm = document.getElementById("activityForm");
 const chosenActivity = document.getElementById("chosenActivity");
 const chosenActivityText = document.getElementById("chosenActivityText");
+const editChoices = document.getElementById("editChoices");
 const music = document.getElementById("backgroundMusic");
 const musicToggle = document.getElementById("musicToggle");
 const musicLabel = document.getElementById("musicLabel");
 
 const today = new Date();
 dateChoice.min = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+
+for (let hour = 1; hour <= 12; hour += 1) {
+  hourChoice.add(new Option(String(hour), String(hour).padStart(2, "0")));
+}
+for (let minute = 0; minute <= 59; minute += 1) {
+  minuteChoice.add(new Option(String(minute).padStart(2, "0"), String(minute).padStart(2, "0")));
+}
 
 document.querySelectorAll("img[data-fallback]").forEach((image) => {
   image.addEventListener("error", () => {
@@ -35,6 +49,25 @@ letterButton.addEventListener("click", () => {
   letterButton.textContent = isOpen ? "Close the letter " : "Open the letter ";
   letterButton.insertAdjacentHTML("beforeend", '<span aria-hidden="true">→</span>');
   document.getElementById("letterPaper").setAttribute("aria-hidden", String(!isOpen));
+});
+
+timeTrigger.addEventListener("click", () => {
+  const isOpen = timePicker.classList.toggle("hidden") === false;
+  timeTrigger.setAttribute("aria-expanded", String(isOpen));
+});
+
+timeOk.addEventListener("click", () => {
+  const hour = Number(hourChoice.value);
+  const minute = minuteChoice.value;
+  const period = periodChoice.value;
+  let hour24 = hour;
+  if (period === "PM" && hour !== 12) hour24 += 12;
+  if (period === "AM" && hour === 12) hour24 = 0;
+  timeChoice.value = `${String(hour24).padStart(2, "0")}:${minute}`;
+  timeTrigger.textContent = `${hour}:${minute} ${period} `;
+  timeTrigger.insertAdjacentHTML("beforeend", '<span aria-hidden="true">⌄</span>');
+  timePicker.classList.add("hidden");
+  timeTrigger.setAttribute("aria-expanded", "false");
 });
 
 maybeButton.addEventListener("click", () => {
@@ -84,6 +117,11 @@ backToQuestion.addEventListener("click", () => {
 
 dateForm.addEventListener("submit", (event) => {
   event.preventDefault();
+  if (!dateChoice.value || !timeChoice.value) {
+    dateForm.reportValidity();
+    timeTrigger.classList.add("needs-time");
+    return;
+  }
   const selectedDate = new Date(`${dateChoice.value}T00:00:00`);
   const formattedDate = new Intl.DateTimeFormat("en-US", {
     weekday: "long",
@@ -101,6 +139,7 @@ dateForm.addEventListener("submit", (event) => {
   dateForm.classList.add("hidden");
   chosenDate.classList.remove("hidden");
   activityForm.classList.remove("hidden");
+  editChoices.classList.remove("hidden");
 });
 
 activityForm.addEventListener("submit", (event) => {
@@ -109,6 +148,14 @@ activityForm.addEventListener("submit", (event) => {
   chosenActivityText.textContent = selectedActivity;
   activityForm.classList.add("hidden");
   chosenActivity.classList.remove("hidden");
+});
+
+editChoices.addEventListener("click", () => {
+  dateForm.classList.remove("hidden");
+  chosenDate.classList.add("hidden");
+  activityForm.classList.add("hidden");
+  chosenActivity.classList.add("hidden");
+  editChoices.classList.add("hidden");
 });
 
 musicToggle.addEventListener("click", async () => {
