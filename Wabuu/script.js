@@ -23,6 +23,7 @@ const activityForm = document.getElementById("activityForm");
 const chosenActivity = document.getElementById("chosenActivity");
 const chosenActivityText = document.getElementById("chosenActivityText");
 const editChoices = document.getElementById("editChoices");
+const planHeading = document.getElementById("planHeading");
 const music = document.getElementById("backgroundMusic");
 const musicToggle = document.getElementById("musicToggle");
 const musicLabel = document.getElementById("musicLabel");
@@ -148,6 +149,7 @@ activityForm.addEventListener("submit", (event) => {
   chosenActivityText.textContent = selectedActivity;
   activityForm.classList.add("hidden");
   chosenActivity.classList.remove("hidden");
+  planHeading.classList.remove("hidden");
 });
 
 editChoices.addEventListener("click", () => {
@@ -156,6 +158,7 @@ editChoices.addEventListener("click", () => {
   activityForm.classList.add("hidden");
   chosenActivity.classList.add("hidden");
   editChoices.classList.add("hidden");
+  planHeading.classList.add("hidden");
 });
 
 musicToggle.addEventListener("click", async () => {
