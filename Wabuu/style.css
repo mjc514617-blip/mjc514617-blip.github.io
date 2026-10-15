@@ -137,6 +137,16 @@ em { color: var(--rose); font-style: italic; }
 .activity-option strong { font-size: 11px; font-weight: 600; }
 .activity-next { width: 100%; margin-top: 14px; }
 .edit-choices { align-self: flex-start; margin-top: 18px; }
+.response-form { margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--line); }
+.response-form label { display: block; margin-bottom: 7px; color: var(--rose-deep); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.response-form label span { color: var(--muted); font-weight: 400; letter-spacing: 0; text-transform: none; }
+.response-form textarea { display: block; width: 100%; resize: vertical; border: 1px solid var(--line); border-radius: 7px; padding: 10px; color: var(--ink); background: #fff; font: 13px/1.5 "DM Sans", sans-serif; }
+.response-form textarea:focus { border-color: var(--rose); outline: 2px solid rgba(185,77,108,.16); }
+.response-submit { width: 100%; margin-top: 11px; }
+.response-submit:disabled { cursor: wait; opacity: .65; }
+.response-status { min-height: 20px; margin: 11px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.response-status.success { color: #39745b; }
+.response-status.error { color: var(--rose-deep); }
 .plan-row { display: flex; gap: 13px; padding: 12px 0; border-top: 1px solid var(--line); }
 .plan-row > span { color: var(--rose); }
 .plan-row small { display: block; margin-bottom: 3px; color: var(--rose); font-size: 9px; letter-spacing: .15em; text-transform: uppercase; }

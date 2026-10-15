@@ -24,6 +24,12 @@ const chosenActivity = document.getElementById("chosenActivity");
 const chosenActivityText = document.getElementById("chosenActivityText");
 const editChoices = document.getElementById("editChoices");
 const planHeading = document.getElementById("planHeading");
+const responseForm = document.getElementById("responseForm");
+const responseDate = document.getElementById("responseDate");
+const responseTime = document.getElementById("responseTime");
+const responseActivity = document.getElementById("responseActivity");
+const responseStatus = document.getElementById("responseStatus");
+const responseSubmit = responseForm.querySelector("button[type='submit']");
 const music = document.getElementById("backgroundMusic");
 const musicToggle = document.getElementById("musicToggle");
 const musicLabel = document.getElementById("musicLabel");
@@ -137,19 +143,52 @@ dateForm.addEventListener("submit", (event) => {
 
   chosenDateText.textContent = formattedDate;
   chosenTimeText.textContent = formattedTime;
+  responseDate.value = formattedDate;
+  responseTime.value = formattedTime;
   dateForm.classList.add("hidden");
   chosenDate.classList.remove("hidden");
   activityForm.classList.remove("hidden");
   editChoices.classList.remove("hidden");
+  responseForm.classList.add("hidden");
 });
 
 activityForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const selectedActivity = activityForm.elements.activity.value;
   chosenActivityText.textContent = selectedActivity;
+  responseActivity.value = selectedActivity;
   activityForm.classList.add("hidden");
   chosenActivity.classList.remove("hidden");
   planHeading.classList.remove("hidden");
+  responseForm.classList.remove("hidden");
+});
+
+responseForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  responseStatus.textContent = "Sending your date plan…";
+  responseStatus.className = "response-status";
+  responseSubmit.disabled = true;
+
+  try {
+    const result = await fetch(responseForm.action, {
+      method: "POST",
+      body: new FormData(responseForm),
+      headers: { Accept: "application/json" }
+    });
+
+    if (!result.ok) {
+      throw new Error(`Form submission failed with status ${result.status}`);
+    }
+
+    responseStatus.textContent = "Sent successfully — your date plan is on its way ♡";
+    responseStatus.classList.add("success");
+  } catch (error) {
+    console.error("Unable to send the date plan.", error);
+    responseStatus.textContent = "We couldn’t send it right now. Please try again.";
+    responseStatus.classList.add("error");
+  } finally {
+    responseSubmit.disabled = false;
+  }
 });
 
 editChoices.addEventListener("click", () => {
@@ -159,6 +198,8 @@ editChoices.addEventListener("click", () => {
   chosenActivity.classList.add("hidden");
   editChoices.classList.add("hidden");
   planHeading.classList.add("hidden");
+  responseForm.classList.add("hidden");
+  responseStatus.textContent = "";
 });
 
 musicToggle.addEventListener("click", async () => {

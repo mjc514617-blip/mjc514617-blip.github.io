@@ -154,6 +154,16 @@
             <div class="chosen-activity hidden" id="chosenActivity" aria-live="polite">
               <div class="plan-row"><span>✦</span><div><small>our date activity</small><strong id="chosenActivityText"></strong></div></div>
             </div>
+            <form class="response-form hidden" id="responseForm" action="https://formspree.io/f/mbgdpojo" method="POST">
+              <input type="hidden" name="date" id="responseDate">
+              <input type="hidden" name="time" id="responseTime">
+              <input type="hidden" name="activity" id="responseActivity">
+              <input type="hidden" name="_subject" value="A new date plan was chosen">
+              <label for="responseMessage">A little message <span>(optional)</span></label>
+              <textarea id="responseMessage" name="message" rows="3" placeholder="Anything you want to say? ♡"></textarea>
+              <button class="button button-primary response-submit" type="submit">Send our date plan <span aria-hidden="true">♡</span></button>
+              <p class="response-status" id="responseStatus" role="status" aria-live="polite"></p>
+            </form>
             <button class="text-button edit-choices hidden" id="editChoices" type="button">Edit my choices <span aria-hidden="true">↺</span></button>
           </div>
           <p class="closing-note">I can’t wait to see you smile. ♡</p>
