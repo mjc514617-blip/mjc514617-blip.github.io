@@ -46,17 +46,31 @@
       <div class="memory-grid">
         <figure class="memory-card memory-card-tall reveal">
           <div class="memory-photo photo-placeholder"><img src="images/memory-01.jpg" alt="Replace with a favorite memory" data-fallback="memory"></div>
-          <figcaption><span>01</span><strong>The kind of happy that lingers.</strong><small>Add a caption about this memory</small></figcaption>
+          <figcaption><span>01</span><strong>The kind of happy that lingers.</strong><small>The moments I wish I could replay.</small></figcaption>
         </figure>
         <figure class="memory-card memory-card-offset reveal">
           <div class="memory-photo photo-placeholder"><img src="images/memory-02.jpg" alt="Replace with a favorite memory" data-fallback="memory"></div>
-          <figcaption><span>02</span><strong>Our little world, our own pace.</strong><small>Add a caption about this memory</small></figcaption>
+          <figcaption><span>02</span><strong>Our little world, our own pace.</strong><small>Somehow, everything feels lighter with you.</small></figcaption>
         </figure>
         <figure class="memory-card memory-card-wide reveal">
           <div class="memory-photo photo-placeholder"><img src="images/memory-03.jpg" alt="Replace with a favorite memory" data-fallback="memory"></div>
-          <figcaption><span>03</span><strong>Here is to all the ones still to come.</strong><small>Add a caption about this memory</small></figcaption>
+          <figcaption><span>03</span><strong>Here is to all the ones still to come.</strong><small>Our next favorite memory is waiting.</small></figcaption>
         </figure>
       </div>
+    </section>
+
+    <section class="timeline-section section-shell">
+      <div class="section-heading reveal">
+        <p class="kicker">A LITTLE TIMELINE</p>
+        <h2>From then,<br><em>to next.</em></h2>
+        <p>A few chapters I hope we keep adding to together.</p>
+      </div>
+      <ol class="memory-timeline">
+        <!-- Replace these sample moments with details from your own story. -->
+        <li class="timeline-item reveal"><span class="timeline-dot">01</span><div><small>the beginning</small><strong>The day our story started.</strong><p>Some moments quietly become the ones we never forget.</p></div></li>
+        <li class="timeline-item reveal"><span class="timeline-dot">02</span><div><small>the little things</small><strong>Every laugh, message, and ordinary day.</strong><p>Those are the pieces of you I keep close.</p></div></li>
+        <li class="timeline-item reveal"><span class="timeline-dot">03</span><div><small>what comes next</small><strong>Our next little adventure.</strong><p>A new memory, chosen by both of us.</p></div></li>
+      </ol>
     </section>
 
     <section class="letter-section" id="letter">
@@ -169,6 +183,11 @@
               <button class="button button-primary response-submit" type="submit">Send our date plan <span aria-hidden="true">♡</span></button>
               <p class="response-status" id="responseStatus" role="status" aria-live="polite"></p>
             </form>
+            <div class="final-confirmation hidden" id="finalConfirmation" aria-live="polite">
+              <span aria-hidden="true">✦</span>
+              <strong>Your little plan is on its way.</strong>
+              <p>I’m already looking forward to seeing you. ♡</p>
+            </div>
             <button class="text-button edit-choices hidden" id="editChoices" type="button">Edit my choices <span aria-hidden="true">↺</span></button>
           </div>
           <p class="closing-note">I can’t wait to see you smile. ♡</p>

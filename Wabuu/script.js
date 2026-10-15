@@ -32,6 +32,7 @@ const responseTime = document.getElementById("responseTime");
 const responseActivity = document.getElementById("responseActivity");
 const responseStatus = document.getElementById("responseStatus");
 const responseSubmit = responseForm.querySelector("button[type='submit']");
+const finalConfirmation = document.getElementById("finalConfirmation");
 const music = document.getElementById("backgroundMusic");
 const musicToggle = document.getElementById("musicToggle");
 const musicLabel = document.getElementById("musicLabel");
@@ -199,6 +200,7 @@ responseForm.addEventListener("submit", async (event) => {
 
     responseStatus.textContent = "Sent successfully — your date plan is on its way ♡";
     responseStatus.classList.add("success");
+    finalConfirmation.classList.remove("hidden");
   } catch (error) {
     console.error("Unable to send the date plan.", error);
     responseStatus.textContent = "We couldn’t send it right now. Please try again.";
@@ -217,6 +219,7 @@ editChoices.addEventListener("click", () => {
   planHeading.classList.add("hidden");
   responseForm.classList.add("hidden");
   responseStatus.textContent = "";
+  finalConfirmation.classList.add("hidden");
 });
 
 musicToggle.addEventListener("click", async () => {

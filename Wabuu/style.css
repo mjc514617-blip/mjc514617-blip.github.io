@@ -74,6 +74,14 @@ em { color: var(--rose); font-style: italic; }
 .memory-card figcaption span { display: block; margin-bottom: 8px; color: var(--rose); font-size: 10px; letter-spacing: .13em; }
 .memory-card strong { display: block; font: 500 19px/1.25 "Playfair Display", Georgia, serif; }
 .memory-card small { display: block; margin-top: 8px; color: #ab8c93; font-size: 11px; }
+.timeline-section { padding: 35px 0 120px; }
+.memory-timeline { position: relative; max-width: 700px; margin: 0 auto; padding: 0; list-style: none; }
+.memory-timeline::before { content: ""; position: absolute; top: 10px; bottom: 10px; left: 19px; width: 1px; background: var(--line); }
+.timeline-item { position: relative; display: grid; grid-template-columns: 40px 1fr; gap: 22px; align-items: start; padding: 0 0 38px; }
+.timeline-dot { position: relative; z-index: 1; display: grid; width: 40px; height: 40px; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--rose); background: var(--cream); font-size: 10px; font-weight: 700; }
+.timeline-item small { display: block; margin: 3px 0 8px; color: var(--rose); font-size: 9px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.timeline-item strong { display: block; font: 500 22px/1.25 "Playfair Display", Georgia, serif; }
+.timeline-item p { max-width: 420px; margin: 8px 0 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
 .letter-section { padding: 105px 0; background: #f8e7e3; }
 .letter-layout { display: grid; grid-template-columns: .8fr 1.2fr; align-items: center; gap: 8vw; }
 .letter-wrap { text-align: center; }
@@ -150,6 +158,10 @@ em { color: var(--rose); font-style: italic; }
 .response-status { min-height: 20px; margin: 11px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
 .response-status.success { color: #39745b; }
 .response-status.error { color: var(--rose-deep); }
+.final-confirmation { margin-top: 20px; padding: 20px 14px; border: 1px solid var(--line); border-radius: 10px; background: #fffaf6; text-align: center; }
+.final-confirmation > span { color: var(--rose); font-size: 20px; }
+.final-confirmation strong { display: block; margin-top: 7px; color: var(--rose-deep); font: 500 20px "Playfair Display", Georgia, serif; }
+.final-confirmation p { margin: 6px 0 0; color: var(--muted); font-size: 12px; }
 .plan-row { display: flex; gap: 13px; padding: 12px 0; border-top: 1px solid var(--line); }
 .plan-row > span { color: var(--rose); }
 .plan-row small { display: block; margin-bottom: 3px; color: var(--rose); font-size: 9px; letter-spacing: .15em; text-transform: uppercase; }
@@ -175,6 +187,8 @@ em { color: var(--rose); font-style: italic; }
   .memory-card-offset .memory-photo { height: 285px; }
   .memory-card-wide .memory-photo { height: 260px; }
   .memory-card strong { font-size: 16px; }
+  .timeline-section { padding: 10px 0 85px; }
+  .timeline-item strong { font-size: 19px; }
   .letter-section { padding: 78px 0 110px; }
   .letter-layout { display: block; }
   .letter-layout .section-heading { margin-bottom: 60px; }
