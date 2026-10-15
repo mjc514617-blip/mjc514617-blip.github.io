@@ -135,6 +135,9 @@ em { color: var(--rose); font-style: italic; }
 .activity-option input { position: absolute; opacity: 0; pointer-events: none; }
 .activity-option span { font-size: 25px; line-height: 1; }
 .activity-option strong { font-size: 11px; font-weight: 600; }
+.custom-activity { display: block; margin-top: 14px; color: var(--rose-deep); font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.custom-activity input { display: block; width: 100%; min-height: 42px; margin-top: 7px; border: 1px solid var(--line); border-radius: 7px; padding: 9px 10px; color: var(--ink); background: #fff; font: 13px "DM Sans", sans-serif; letter-spacing: 0; text-transform: none; }
+.custom-activity input:focus { border-color: var(--rose); outline: 2px solid rgba(185,77,108,.16); }
 .activity-next { width: 100%; margin-top: 14px; }
 .edit-choices { align-self: flex-start; margin-top: 18px; }
 .response-form { margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--line); }

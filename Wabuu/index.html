@@ -148,7 +148,12 @@
                 <label class="activity-option"><input type="radio" name="activity" value="Mang Inasal"><span>🍗</span><strong>Mang Inasal</strong></label>
                 <label class="activity-option"><input type="radio" name="activity" value="Samgyup"><span>🥓</span><strong>Samgyup</strong></label>
                 <label class="activity-option"><input type="radio" name="activity" value="Eat all you can"><span>🍽️</span><strong>Eat all you can</strong></label>
+                <label class="activity-option"><input type="radio" name="activity" value="Something else"><span>✨</span><strong>Something else</strong></label>
               </div>
+              <label class="custom-activity hidden" id="customActivityWrap" for="customActivity">
+                Tell me your idea
+                <input id="customActivity" type="text" maxlength="80" placeholder="e.g. picnic, museum, night drive">
+              </label>
               <button class="button button-primary activity-next" type="submit">Next <span aria-hidden="true">→</span></button>
             </form>
             <div class="chosen-activity hidden" id="chosenActivity" aria-live="polite">

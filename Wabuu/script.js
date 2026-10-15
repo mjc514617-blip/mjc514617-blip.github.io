@@ -22,6 +22,8 @@ const chosenTimeText = document.getElementById("chosenTimeText");
 const activityForm = document.getElementById("activityForm");
 const chosenActivity = document.getElementById("chosenActivity");
 const chosenActivityText = document.getElementById("chosenActivityText");
+const customActivityWrap = document.getElementById("customActivityWrap");
+const customActivity = document.getElementById("customActivity");
 const editChoices = document.getElementById("editChoices");
 const planHeading = document.getElementById("planHeading");
 const responseForm = document.getElementById("responseForm");
@@ -43,6 +45,14 @@ for (let hour = 1; hour <= 12; hour += 1) {
 for (let minute = 0; minute <= 59; minute += 1) {
   minuteChoice.add(new Option(String(minute).padStart(2, "0"), String(minute).padStart(2, "0")));
 }
+
+activityForm.addEventListener("change", (event) => {
+  if (event.target.name !== "activity") return;
+  const isCustom = event.target.value === "Something else";
+  customActivityWrap.classList.toggle("hidden", !isCustom);
+  customActivity.required = isCustom;
+  if (isCustom) customActivity.focus();
+});
 
 document.querySelectorAll("img[data-fallback]").forEach((image) => {
   image.addEventListener("error", () => {
@@ -154,7 +164,14 @@ dateForm.addEventListener("submit", (event) => {
 
 activityForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  const selectedActivity = activityForm.elements.activity.value;
+  const selectedOption = activityForm.elements.activity.value;
+  const selectedActivity = selectedOption === "Something else"
+    ? customActivity.value.trim()
+    : selectedOption;
+  if (!selectedActivity) {
+    customActivity.reportValidity();
+    return;
+  }
   chosenActivityText.textContent = selectedActivity;
   responseActivity.value = selectedActivity;
   activityForm.classList.add("hidden");
